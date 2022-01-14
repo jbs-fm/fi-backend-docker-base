@@ -1,11 +1,11 @@
-FROM php:8.1.1-fpm-alpine
+FROM php:8.0.14-fpm-alpine as system-setup
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repositories
 ARG APK_COMMON_DEPENDENCIES="bash busybox-suid curl dcron git libcap mysql-client unzip zip"
 RUN apk add --update --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/latest-stable/main $APK_COMMON_DEPENDENCIES
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-ARG PHP_EXTENSIONS="bcmath exif gd imagick intl opcache pcntl pdo_mysql rdkafka sockets uuid zip"
+ARG PHP_EXTENSIONS="bcmath exif gd imagick intl opcache pcntl pdo_mysql rdkafka-5.0.2 sockets uuid zip"
 RUN install-php-extensions $PHP_EXTENSIONS
 
 ENV NON_ROOT_GROUP=${NON_ROOT_GROUP:-app}
