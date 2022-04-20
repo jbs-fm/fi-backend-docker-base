@@ -5,7 +5,7 @@ ARG APK_COMMON_DEPENDENCIES="bash busybox-suid curl dcron git libcap mysql-clien
 RUN apk add --update --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/latest-stable/main $APK_COMMON_DEPENDENCIES
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-ARG PHP_EXTENSIONS="bcmath exif gd imagick intl opcache pcntl pdo_mysql sockets uuid zip"
+ARG PHP_EXTENSIONS="bcmath exif gd imagick intl opcache pcntl pcov pdo_mysql sockets uuid zip"
 RUN install-php-extensions $PHP_EXTENSIONS
 
 ENV NON_ROOT_GROUP=${NON_ROOT_GROUP:-app}
