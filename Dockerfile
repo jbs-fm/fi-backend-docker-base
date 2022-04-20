@@ -1,4 +1,4 @@
-FROM php:8.1.4-fpm-alpine as system-setup
+FROM php:8.1.5-fpm-alpine as system-setup
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repositories
 ARG APK_COMMON_DEPENDENCIES="bash busybox-suid curl dcron git libcap mysql-client unzip zip"
